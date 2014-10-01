@@ -15,6 +15,7 @@ module RubyGrep
     private
 
     def process_with_options(regexp)
+      regexp = "^((?!#{regexp}).)*$" if options[:invert_selection]
       Regexp.compile(regexp, options[:ignore_case])
     end
   end
