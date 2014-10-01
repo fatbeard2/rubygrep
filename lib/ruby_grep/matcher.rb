@@ -15,7 +15,7 @@ module RubyGrep
     private
 
     def process_with_options(regexp)
-      Regexp.new(regexp, options[:ignore_case])
+      Regexp.compile(regexp, options[:ignore_case])
     end
   end
 end
