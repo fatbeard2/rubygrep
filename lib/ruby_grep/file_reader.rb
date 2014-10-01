@@ -1,4 +1,3 @@
-
 module RubyGrep
   class FileReader
     attr_accessor :file_names, :skip_current_file
@@ -23,7 +22,7 @@ module RubyGrep
       end
     end
 
-    def next_file
+    def next_file!
       @skip_current_file = true
     end
 
