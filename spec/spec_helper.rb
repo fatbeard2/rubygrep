@@ -6,11 +6,10 @@ require 'rubygrep/matcher'
 require 'rubygrep/outputter'
 require 'optparse'
 
-module Rubygrep
+RSpec.configure do |config|
+  # Use color in STDOUT
+  config.color = true
 
-  def self.grep
-    options = RubyGrepOptions.new(ARGV)
-    GrepManager.new(options, options.expression, options.file_names).run
-  end
-
+  # Use the specified formatter
+  config.formatter = :progress # :progress, :html, :textmate
 end
