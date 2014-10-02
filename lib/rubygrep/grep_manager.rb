@@ -1,4 +1,4 @@
-module RubyGrep
+module Rubygrep
   class GrepManager
     attr_reader :file_reader, :matcher, :outputter
 

@@ -1,4 +1,4 @@
-module RubyGrep
+module Rubygrep
   class Outputter
     attr_accessor :options
 

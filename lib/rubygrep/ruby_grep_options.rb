@@ -1,4 +1,4 @@
-module RubyGrep
+module Rubygrep
   class RubyGrepOptions
     attr_accessor :file_reader_options, :matcher_options, :outputter_options,
                   :general_output_options, :file_names, :expression
@@ -12,20 +12,19 @@ module RubyGrep
 
     def parse_options(args)
       options_parser.parse!(args)
-      end_grep('Expression in required') unless args[0]
+      end_grep('Expression is required') unless args[0]
       @expression = args.shift
       end_grep('At least one file in required') unless args[0]
       @file_names = args
       end
 
     def end_grep(message)
-      puts message
-      exit(0)
+      raise message
     end
 
     def options_parser
       OptionParser.new do |opts|
-        opts.banner = 'Usage: RubyGrep.grep [options] expression [file1 file2] ...'
+        opts.banner = 'Usage: rubygrep.grep [options] expression [file1 file2] ...'
 
         #file_reader_options
         opts.on( '-r', '--recursive', 'recursively read directories' ) do

@@ -6,10 +6,3 @@ require 'rubygrep/matcher'
 require 'rubygrep/outputter'
 require 'optparse'
 
-RSpec.configure do |config|
-  # Use color in STDOUT
-  config.color = true
-
-  # Use the specified formatter
-  config.formatter = :progress # :progress, :html, :textmate
-end

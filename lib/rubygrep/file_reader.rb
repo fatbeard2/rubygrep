@@ -1,4 +1,4 @@
-module RubyGrep
+module Rubygrep
   class FileReader
     attr_accessor :file_names, :skip_current_file, :options
 
