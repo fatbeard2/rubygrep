@@ -18,6 +18,9 @@ module Rubygrep
       if options[:line_number]
         result = "#{line_data[:str_num]}: #{result}"
       end
+      if options[:with_filename]
+        result = "#{line_data[:path]}: #{result}"
+      end
       result
     end
 

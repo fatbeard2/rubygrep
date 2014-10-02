@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'rubygrep'
+
+options = Rubygrep::RubyGrepOptions.new(ARGV)
+Rubygrep::GrepManager.new(options, options.expression, options.file_names).run

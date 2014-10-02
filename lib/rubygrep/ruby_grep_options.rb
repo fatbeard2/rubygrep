@@ -16,6 +16,7 @@ module Rubygrep
       @expression = args.shift
       end_grep('At least one file in required') unless args[0]
       @file_names = args
+      outputter_options[:with_filename] = true if @file_names.length > 1
       end
 
     def end_grep(message)
@@ -47,6 +48,10 @@ module Rubygrep
 
         opts.on('-n','--line-number','Prefix each line of output with the 1-based line number within its input file.') do
           outputter_options[:line_number] = true
+        end
+
+        opts.on('-H','--with-filename', 'Print the file name for each match. This is the default when there is more than one file to search.') do
+          outputter_options[:with_filename] = true
         end
       end
     end

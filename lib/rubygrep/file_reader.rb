@@ -32,12 +32,13 @@ module Rubygrep
 
     def process_with_options(file_names, current_folder = '.')
       file_names.each do |file_name|
-        if File.directory?(file_name) && options[:recursive]
-          process_with_options(inner_files(file_name), relative_path(file_name, current_folder))
-        elsif File.file?(file_name)
-          @file_names << relative_path(file_name, current_folder)
+        file_path = relative_path(file_name, current_folder)
+        if File.directory?(file_path) && options[:recursive]
+          process_with_options(inner_files(file_path), file_path)
+        elsif File.file?(file_path)
+          @file_names << file_path
         else
-          puts "No such file or directory #{file_name}"
+          puts "No such file or directory #{file_path}"
         end
       end
     end
@@ -47,7 +48,7 @@ module Rubygrep
     end
 
     def relative_path(file_name, folder)
-        if file_name =~ /^\\|\./
+        if file_name =~ /^\\/ || folder == '.'
           file_name
         else
           "#{folder}/#{file_name}"
