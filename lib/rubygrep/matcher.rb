@@ -2,7 +2,7 @@ module Rubygrep
   class Matcher
     attr_accessor :options, :regexp
 
-    def initialize(regexp, options)
+    def initialize(regexp, options = {})
       @options = options
       @regexp = process_with_options(regexp)
     end

@@ -2,7 +2,7 @@ module Rubygrep
   class Outputter
     attr_accessor :options
 
-    def initialize(options)
+    def initialize(options = {})
       @options = options
     end
 

@@ -4,6 +4,20 @@ RSpec.describe Rubygrep::Matcher do
     {str: str}
   end
 
+  context 'with no options' do
+    let(:matcher) { Rubygrep::Matcher.new('\d\d\d\d') }
+
+    it 'should not match string' do
+      expect(matcher.matches?(string_data('123l2'))).to be(nil)
+    end
+
+    it 'should match string' do
+      expect(matcher.matches?(string_data('123l2234'))).to be_instance_of(MatchData)
+      expect(matcher.matches?(string_data('123l2234')).to_s).to eq('2234')
+    end
+
+  end
+
   context 'with -i option on' do
     let(:i_matcher) { Rubygrep::Matcher.new('test', {ignore_case: true}) }
 
