@@ -2,7 +2,7 @@ module Rubygrep
   class FileReader
     attr_accessor :file_names, :skip_current_file, :options
 
-    def initialize(file_names, options)
+    def initialize(file_names, options = {})
       @options = options
       @file_names = []
       process_with_options(file_names)
@@ -30,13 +30,14 @@ module Rubygrep
 
     private
 
-    def process_with_options(file_names, current_folder = Dir.getwd)
+    def process_with_options(file_names, current_folder = '.')
       file_names.each do |file_name|
-        file_path = path(file_name, current_folder)
-        if File.directory?(file_path) && options[:recursive]
-          process_with_options(inner_files(file_path), file_path)
-        elsif File.file?(file_path)
-          @file_names << path(file_name, current_folder)
+        if File.directory?(file_name) && options[:recursive]
+          process_with_options(inner_files(file_name), relative_path(file_name, current_folder))
+        elsif File.file?(file_name)
+          @file_names << relative_path(file_name, current_folder)
+        else
+          puts "No such file or directory #{file_name}"
         end
       end
     end
@@ -45,12 +46,16 @@ module Rubygrep
       Dir.entries(folder_name).delete_if {|file| file =~ /^\./}
     end
 
-    def path(file_name, folder = Dir.getwd)
-      File.expand_path(file_name, folder)
+    def relative_path(file_name, folder)
+        if file_name =~ /^\\|\./
+          file_name
+        else
+          "#{folder}/#{file_name}"
+        end
     end
 
     def open_file(file_name)
-      File.open(path(file_name))
+      File.open(File.expand_path(file_name, Dir.getwd))
     rescue Errno::ENOENT
       puts "No such file or directory #{file_name}"
       false
