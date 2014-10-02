@@ -12,7 +12,8 @@ RSpec.describe Rubygrep::FileReader do
   context 'with several files' do
     let (:reader) {Rubygrep::FileReader.new(several_files)}
     before do
-      allow(File).to receive(:file?)  { |file_name| several_files.include?(file_name) }
+      allow(File).to receive(:file?) { |file_name| several_files.include?(file_name) }
+      allow(File).to receive(:open) { StringIO.new("YHOO,141414") }
     end
 
     it 'should lookup for several files' do
@@ -20,7 +21,7 @@ RSpec.describe Rubygrep::FileReader do
     end
 
     it 'should lookup for several files' do
-      expect { reader.each_line }.to yield_with_args(several_files)
+      expect(reader.each_line).to yield_with_args(several_files)
     end
 
   end
