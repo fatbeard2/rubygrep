@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["andrey"]
   spec.email         = ["om08uhkn@gmail.com"]
   spec.summary       = %q{Analog of unix grep utility.}
-  spec.description   = %q{Globally searches regexp and prints it}
+  spec.description   = %q{Globally searches for in files regexp and prints it}
   spec.homepage      = "https://github.com/fatbeard2/rubygrep"
   spec.license       = "MIT"
 

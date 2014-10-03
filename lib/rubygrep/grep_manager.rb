@@ -10,9 +10,13 @@ module Rubygrep
 
     def run
       file_reader.each_line do |line_data|
-        match_data = matcher.matches?(line_data)
-        if match_data
-          outputter.out(match_data, line_data)
+        begin
+          match_data = matcher.matches?(line_data)
+          if match_data
+            outputter.out(match_data, line_data)
+          end
+        rescue Exception => e
+          file_reader.next_file!
         end
       end
     end

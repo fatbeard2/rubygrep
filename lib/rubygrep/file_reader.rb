@@ -1,5 +1,8 @@
 module Rubygrep
   class FileReader
+    #this class can be splitted in two
+    #one for getting files by name
+    #another for outputting them line by line
     attr_accessor :file_names, :skip_current_file, :options
 
     def initialize(file_names, options = {})
@@ -35,9 +38,9 @@ module Rubygrep
         file_path = relative_path(file_name, current_folder)
         if File.directory?(file_path) && options[:recursive]
           process_with_options(inner_files(file_path), file_path)
-        elsif File.file?(file_path)
+        elsif text_file?(file_path)
           @file_names << file_path
-        else
+        elsif !File.exists?(file_path)
           puts "No such file or directory #{file_path}"
         end
       end
@@ -56,13 +59,17 @@ module Rubygrep
     end
 
     def open_file(file_name)
-      File.open(File.expand_path(file_name, Dir.getwd))
+      File.open(file_name)
     rescue Errno::ENOENT
       puts "No such file or directory #{file_name}"
       false
     rescue Errno::EACCES
       puts "Permission denied: #{file_name}"
       false
+    end
+
+    def text_file?(file_name)
+      true
     end
 
   end
