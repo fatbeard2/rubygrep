@@ -51,11 +51,11 @@ module Rubygrep
     end
 
     def relative_path(file_name, folder)
-        if file_name =~ /^\\/ || folder == '.'
-          file_name
-        else
-          "#{folder}/#{file_name}"
-        end
+      if file_name =~ /^\\/ || folder == '.'
+        file_name
+      else
+        "#{folder}/#{file_name}"
+      end
     end
 
     def open_file(file_name)
