@@ -18,6 +18,7 @@ module Rubygrep
           end
         rescue Exception => e
           file_reader.next_file!
+          outputter.error(e.message, line_data)
         end
       end
     end

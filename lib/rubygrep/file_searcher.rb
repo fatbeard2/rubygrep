@@ -28,7 +28,7 @@ module Rubygrep
     end
 
     def inner_files(folder_name)
-      Dir.entries(folder_name).delete_if {|file| file =~ /^\./}
+      Dir.entries(folder_name).select {|entry| entry != '.' and entry != '..'}
     end
 
     def relative_path(file_name, folder)

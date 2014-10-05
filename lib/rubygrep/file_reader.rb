@@ -18,6 +18,7 @@ module Rubygrep
         num = 0
         if next_file
           next_file.each_line do |str|
+            str = str.encode("UTF-16be", :invalid=>:replace, :replace=>"").encode('UTF-8') unless str.valid_encoding?
             yield({str: str, path: file_name, str_num: num+=1})
             if skip_current_file
               @skip_current_file = false
