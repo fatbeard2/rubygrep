@@ -15,24 +15,6 @@ RSpec.describe Rubygrep::RubyGrepOptions do
   end
 
   context 'with no additional options' do
-    subject(:options_object) {create_options(%w(exp text))}
-
-    it 'should parse expression' do
-      expect(options_object.expression).to eq('exp')
-    end
-
-    it 'should parse file_names' do
-      expect(options_object.file_names).to eq(%w(text))
-    end
-
-    it 'should have blank options' do
-      expect(options_object.file_reader_options).to eq({})
-      expect(options_object.matcher_options).to eq({})
-      expect(options_object.outputter_options).to eq({})
-    end
-  end
-
-  context 'with no additional options' do
     subject(:options_object) {create_options(%w(exp text text1 text2))}
 
     it 'should parse expression' do
@@ -43,8 +25,14 @@ RSpec.describe Rubygrep::RubyGrepOptions do
       expect(options_object.file_names).to eq(%w(text text1 text2))
     end
 
-    # fixme: wont work if you specify only one folder with many files in it
-    it 'should have file name option on' do
+    it 'should have blank options' do
+      expect(options_object.file_reader_options).to eq({})
+      expect(options_object.matcher_options).to eq({})
+      expect(options_object.outputter_options).to eq({})
+    end
+
+    it 'should set with_filename option to true' do
+      options_object.set_multi_file_mode
       expect(options_object.outputter_options).to eq({:with_filename => true})
     end
   end

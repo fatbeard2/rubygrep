@@ -2,9 +2,10 @@ module Rubygrep
   class GrepManager
     attr_reader :file_reader, :matcher, :outputter
 
-    def initialize(options, expression, file_names)
-      @file_reader = FileReader.new(file_names, options.file_reader_options)
-      @matcher = Matcher.new(expression, options.matcher_options)
+    def initialize(options)
+      @file_reader = FileReader.new(options.file_names, options.file_reader_options)
+      options.set_multi_file_mode if @file_reader.has_several_files?
+      @matcher = Matcher.new(options.expression, options.matcher_options)
       @outputter = Outputter.new(options.outputter_options)
     end
 

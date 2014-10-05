@@ -3,4 +3,4 @@
 require 'rubygrep'
 
 options = Rubygrep::RubyGrepOptions.new(ARGV)
-Rubygrep::GrepManager.new(options, options.expression, options.file_names).run
+Rubygrep::GrepManager.new(options).run

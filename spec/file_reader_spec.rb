@@ -20,25 +20,34 @@ RSpec.describe Rubygrep::FileReader do
     end
   end
 
-  it 'should read files line by line' do
-    reader = Rubygrep::FileReader.new(several_files)
-    reader.each_line do |line_data|
-      expect(line_data[:str]).to eq(line_data[:path]+"\n")
-      expect(line_data[:str_num]).to be_between(1,3)
+  context 'with several files' do
+    subject(:reader) { Rubygrep::FileReader.new(several_files) }
+
+    it 'should read files line by line' do
+      reader.each_line do |line_data|
+        expect(line_data[:str]).to eq(line_data[:path]+"\n")
+        expect(line_data[:str_num]).to be_between(1,3)
+      end
+    end
+
+    it 'should read all lines' do
+      expect { |b| reader.each_line(&b) }.to yield_control.exactly(15).times
+    end
+
+    it 'should skip files' do
+      reader.each_line do |line_data|
+        reader.next_file!
+        expect(line_data[:str_num]).to eq(1)
+      end
+    end
+
+    it 'should respond to has_several_files? message' do
+      expect(reader.has_several_files?).to eq(true)
     end
   end
 
-  it 'should read all lines' do
-    reader = Rubygrep::FileReader.new(several_files)
-    expect { |b| reader.each_line(&b) }.to yield_control.exactly(15).times
-  end
 
-  it 'should skip files' do
-    reader = Rubygrep::FileReader.new(several_files)
-    reader.each_line do |line_data|
-      reader.next_file!
-      expect(line_data[:str_num]).to eq(1)
-    end
-  end
+
+
 
 end

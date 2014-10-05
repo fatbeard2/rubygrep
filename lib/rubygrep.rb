@@ -11,7 +11,7 @@ module Rubygrep
 
   def self.grep
     options = RubyGrepOptions.new(ARGV)
-    GrepManager.new(options, options.expression, options.file_names).run
+    GrepManager.new(options).run
   end
 
 end

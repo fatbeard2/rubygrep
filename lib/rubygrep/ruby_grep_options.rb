@@ -8,6 +8,10 @@ module Rubygrep
       parse_options(args)
     end
 
+    def set_multi_file_mode
+      outputter_options[:with_filename] = true
+    end
+
     private
 
     def parse_options(args)
@@ -16,7 +20,6 @@ module Rubygrep
       @expression = args.shift
       end_grep('At least one file in required') unless args[0]
       @file_names = args
-      outputter_options[:with_filename] = true if @file_names.length > 1
       end
 
     def end_grep(message)

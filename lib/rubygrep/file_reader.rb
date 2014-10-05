@@ -8,6 +8,10 @@ module Rubygrep
       @file_names = FileSearcher.new(options).search(file_names)
     end
 
+    def has_several_files?
+      file_names.length > 1
+    end
+
     def each_line
       file_names.each do |file_name|
         next_file = open_file(file_name)
