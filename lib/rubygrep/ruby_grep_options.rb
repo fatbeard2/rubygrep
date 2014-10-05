@@ -28,7 +28,7 @@ module Rubygrep
 
     def options_parser
       OptionParser.new do |opts|
-        opts.banner = 'Usage: rubygrep.grep [options] expression [file1 file2] ...'
+        opts.banner = 'Usage: rubygrep [options] expression file1 [file2 file3 ...]'
 
         #file_reader_options
         opts.on( '-r', '--recursive', 'recursively read directories' ) do
