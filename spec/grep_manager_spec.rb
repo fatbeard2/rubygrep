@@ -10,7 +10,7 @@ It was popularised in the 1960s with the release of Letraset sheets
 containing Lorem Ipsum passages, and more recently with desktop
 publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 HERE
-text1 =  <<-'HERE'
+text1 =  <<-HERE
 Contrary to popular belief, Lorem Ipsum is not simply random text
 It has roots in a piece of classical Latin literature from 45 BC, making it over
 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College
@@ -23,10 +23,10 @@ This book is a treatise on the theory of ethics, very popular
 during the Renaissance. The first line of Lorem Ipsum,
 "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
 HERE
-match_output = <<-'HERE'
-text1: 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College
-text2: standard dummy text ever since the 1500s, when an unknown
-text2: It was popularised in the 1960s with the release of Letraset sheets
+match_output = <<-HERE
+\033[35mtext1\033[0m: \033[31m2000\033[0m years old. Richard McClintock, a Latin professor at Hampden-Sydney College
+\033[35mtext2\033[0m: standard dummy text ever since the \033[31m1500\033[0ms, when an unknown
+\033[35mtext2\033[0m: It was popularised in the \033[31m1960\033[0ms with the release of Letraset sheets
 HERE
 
 
